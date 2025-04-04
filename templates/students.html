@@ -1,0 +1,55 @@
+<!-- templates/students.html -->
+{% extends "base.html" %}
+
+{% block title %}Quản lý sinh viên{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-6">📋 Danh sách sinh viên</h1>
+
+    <!-- Bộ lọc -->
+    <form method="GET" action="/students" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <input type="text" name="name" placeholder="Tên sinh viên" class="px-4 py-2 border rounded" />
+        <input type="text" name="student_id" placeholder="Mã sinh viên" class="px-4 py-2 border rounded" />
+        <input type="text" name="class" placeholder="Lớp" class="px-4 py-2 border rounded" />
+        <input type="text" name="faculty" placeholder="Khoa" class="px-4 py-2 border rounded" />
+        <button type="submit" class="col-span-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Lọc</button>
+    </form>
+
+    <!-- Nút thêm sinh viên -->
+    <div class="mb-4">
+        <a href="/students/add" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+            ➕ Thêm sinh viên
+        </a>
+    </div>
+
+    <!-- Bảng sinh viên -->
+    <table class="w-full bg-white shadow rounded overflow-hidden text-sm">
+        <thead class="bg-blue-600 text-white">
+            <tr>
+                <th class="px-4 py-2 text-left">Mã SV</th>
+                <th class="px-4 py-2 text-left">Họ tên</th>
+                <th class="px-4 py-2 text-left">Lớp</th>
+                <th class="px-4 py-2 text-left">Khoa</th>
+                <th class="px-4 py-2 text-center">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr class="border-b">
+                <td class="px-4 py-2">{{ student.student_id }}</td>
+                <td class="px-4 py-2">{{ student.name }}</td>
+                <td class="px-4 py-2">{{ student.class_name }}</td>
+                <td class="px-4 py-2">{{ student.faculty }}</td>
+                <td class="px-4 py-2 text-center space-x-2">
+                    <a href="/students/edit/{{ student.id }}" class="text-blue-600 hover:underline">Sửa</a>
+                    <a href="/students/delete/{{ student.id }}" class="text-red-600 hover:underline" onclick="return confirm('Xóa sinh viên này?')"> Xóa</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="px-4 py-4 text-center text-gray-500">Không có sinh viên nào.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

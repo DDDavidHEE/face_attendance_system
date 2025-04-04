@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách điểm danh hôm nay</title>
+</head>
+<body>
+    <h2>📋 Danh sách điểm danh - Ngày {{ today }}</h2>
+    {% if records %}
+        <table border="1" cellpadding="5">
+            <tr>
+  <th>STT</th>
+  <th>Mã sinh viên</th>
+  <th>Giờ đến</th>
+  <th>Trạng thái</th>
+  <th>Ảnh xác minh</th>
+</tr>
+{% for r in records %}
+<tr>
+  <td>{{ loop.index }}</td>
+  <td>{{ r.student_id }}</td>
+  <td>{{ r.time }}</td>
+  <td>{{ r.status }}</td>
+  <td>
+    {% if r.image_path %}
+      <img src="{{ url_for('static', filename=r.image_path.split('static/')[1]) }}" width="80">
+    {% else %}
+      Không có
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+
+        </table>
+    {% else %}
+        <p>Không có sinh viên nào điểm danh hôm nay.</p>
+    {% endif %}
+
+    <p><a href="/">← Về trang chủ</a></p>
+</body>
+</html>

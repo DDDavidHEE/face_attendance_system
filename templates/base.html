@@ -1,0 +1,30 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Quản lý sinh viên{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+        <h1 class="text-xl font-bold">Quản lý sinh viên</h1>
+        <div class="space-x-4">
+            <a href="/" class="hover:underline">Trang chủ</a>
+            <a href="/students" class="hover:underline">Quản lý sinh viên</a>
+            <a href="/attendance/today" class="hover:underline">Điểm danh hôm nay</a>
+        </div>
+    </nav>
+
+    <main class="p-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-10 py-4 text-center text-sm text-gray-500">
+        © 2025 Hệ thống quản lý sinh viên AI. Được phát triển bởi bạn 👨‍💻
+    </footer>
+</body>
+</html>

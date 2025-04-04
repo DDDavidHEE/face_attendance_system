@@ -1,0 +1,28 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% block content %}
+<h2 class="text-3xl font-bold mb-4">🎓 Hệ thống điểm danh sinh viên bằng AI</h2>
+<p class="mb-6 text-lg text-gray-600">Chào mừng đến với hệ thống! Dưới đây là thông tin thống kê nhanh trong ngày:</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-gray-500">Tổng sinh viên</p>
+        <h3 class="text-3xl font-bold">{{ total_students }}</h3>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-gray-500">Đã điểm danh</p>
+        <h3 class="text-3xl font-bold">{{ checked_in }}</h3>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-gray-500">Vắng mặt</p>
+        <h3 class="text-3xl font-bold">{{ absent }}</h3>
+    </div>
+</div>
+
+<a href="/attendance/today" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl text-lg font-medium">
+    📋 Xem danh sách điểm danh hôm nay
+</a>
+{% endblock %}

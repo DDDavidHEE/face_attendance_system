@@ -1,41 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Danh sách điểm danh hôm nay</title>
-</head>
-<body>
-    <h2>📋 Danh sách điểm danh - Ngày {{ today }}</h2>
-    {% if records %}
-        <table border="1" cellpadding="5">
-            <tr>
-  <th>STT</th>
-  <th>Mã sinh viên</th>
-  <th>Giờ đến</th>
-  <th>Trạng thái</th>
-  <th>Ảnh xác minh</th>
-</tr>
-{% for r in records %}
-<tr>
-  <td>{{ loop.index }}</td>
-  <td>{{ r.student_id }}</td>
-  <td>{{ r.time }}</td>
-  <td>{{ r.status }}</td>
-  <td>
-    {% if r.image_path %}
-      <img src="{{ url_for('static', filename=r.image_path.split('static/')[1]) }}" width="80">
-    {% else %}
-      Không có
-    {% endif %}
-  </td>
-</tr>
-{% endfor %}
+{% extends 'base.html' %}
 
-        </table>
-    {% else %}
-        <p>Không có sinh viên nào điểm danh hôm nay.</p>
-    {% endif %}
+{% block title %}Danh sách điểm danh hôm nay{% endblock %}
 
-    <p><a href="/">← Về trang chủ</a></p>
-</body>
-</html>
+{% block content %}
+<h2 class="text-3xl font-bold mb-4">📋 Danh sách điểm danh - Ngày {{ today }}</h2>
+
+{% if records %}
+    <table class="table-auto w-full bg-white border-collapse rounded-lg shadow-md">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="py-2 px-4 text-left">STT</th>
+                <th class="py-2 px-4 text-left">Mã sinh viên</th>
+                <th class="py-2 px-4 text-left">Tên sinh viên</th>
+                <th class="py-2 px-4 text-left">Giờ đến</th>
+                <th class="py-2 px-4 text-left">Trạng thái</th>
+                <th class="py-2 px-4 text-left">Ảnh xác minh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in records %}
+            <tr class="border-b hover:bg-gray-100">
+                <td class="py-2 px-4">{{ loop.index }}</td>
+                <td class="py-2 px-4">{{ r.student_id }}</td>
+                <td class="py-2 px-4">{{ r.student_name }}</td>
+                <td class="py-2 px-4">{{ r.time }}</td>
+                <td class="py-2 px-4">{{ r.status }}</td>
+                <td class="py-2 px-4">
+                    {% if r.image_path %}
+                        <img src="{{ url_for('static', filename=r.image_path.split('static/')[1]) }}" width="80">
+                    {% else %}
+                        Không có ảnh
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Không có sinh viên nào điểm danh hôm nay.</p>
+{% endif %}
+
+<p><a href="/">← Về trang chủ</a></p>
+{% endblock %}
+
+
+

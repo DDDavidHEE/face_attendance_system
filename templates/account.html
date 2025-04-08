@@ -1,0 +1,27 @@
+<!-- templates/account.html -->
+{% extends "base.html" %}
+
+{% block title %}Quản lý tài khoản{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-semibold mb-6">👤 Quản lý tài khoản</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
+        <input type="text" name="username" id="username" class="mt-1 block w-full px-4 py-2 border rounded-md" value="{{ user.username }}" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" name="email" id="email" class="mt-1 block w-full px-4 py-2 border rounded-md" value="{{ user.email }}" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="background_image" class="block text-sm font-medium text-gray-700">Ảnh nền</label>
+        <input type="file" name="background_image" id="background_image" class="mt-1 block w-full">
+    </div>
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Cập nhật</button>
+</form>
+{% endblock %}

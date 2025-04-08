@@ -2,14 +2,43 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Optional FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> <!-- Tailwind CSS -->
 </head>
-<body>
-    <h2>Đăng ký tài khoản Admin</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Tên đăng nhập" required><br><br>
-        <input type="password" name="password" placeholder="Mật khẩu" required><br><br>
-        <button type="submit">Đăng ký</button>
-    </form>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center mb-6">Đăng ký tài khoản Admin</h2>
+
+        <form method="POST">
+            <!-- Display flash messages for errors or success -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mb-4">
+                        {% for category, message in messages %}
+                            <div class="text-red-600 font-semibold">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700">Tên đăng nhập</label>
+                <input type="text" name="username" id="username" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nhập tên đăng nhập" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Mật khẩu</label>
+                <input type="password" name="password" id="password" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Đăng ký</button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <p>Bạn đã có tài khoản? <a href="/login" class="text-blue-500 hover:underline">Đăng nhập ngay</a></p>
+        </div>
+    </div>
 </body>
 </html>
